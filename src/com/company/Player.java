@@ -15,7 +15,7 @@ public class Player {
     }
 
     public void setX(int x) {
-        if (x == 66) {
+        if (x == 66 || x==34) {
             this.x=x;
         } else {
             this.x+=x;
@@ -27,9 +27,10 @@ public class Player {
     }
 
     public void setY(int y) {
-        if (y == 9) {
+        if (y == 20 || y == 9) {
             this.y=y;
-        } else {
+        }
+        else {
             this.y+=y;
         }
     }

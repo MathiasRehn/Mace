@@ -22,6 +22,7 @@ public class Game {
     int p1 = 0;
     int p2 = 0;
     int count;
+    Key key;
 
     public Game() {
         this.terminal=TerminalFacade.createTerminal(System.in,System.out,Charset.forName("UTF8"));
@@ -31,22 +32,22 @@ public class Game {
         this.input=new Input(terminal,gameboard);
         this.render=new Render(terminal,gameboard);
         this.player=new Player(34,9);
-        this.player2=new Player(66,9);
-        this.monster1=new Monster(4,5,2);
+        this.player2=new Player(66,20);
+        this.monster1=new Monster(50,15,2);
     }
 
     public void run() throws FileNotFoundException, InterruptedException {
-        render.levelDraw();
+        render.startScreen();
         terminal.moveCursor(49,0);
         terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
         terminal.putCharacter('0');
-
+        count=11;
         while (gameRuns) {
-
-            count++;
-            comp = 0;
-            p1 = 0;
-            p2 = 0;
+            count--;
+            input.movePlayer(terminal,player,player2,render,monster1,comp,p1,p2,count);
+            comp=0;
+            p1=0;
+            p2=0;
             for (int x=0; x < gameboard.WIDTH; x++) {
                 for (int Y=0; Y < gameboard.HEIGHT; Y++) {
                     if (gameboard.board[x][Y] == 0) {
@@ -58,38 +59,28 @@ public class Game {
                     }
                 }
             }
-
-            terminal.moveCursor(20,0);
-            s="Plaver 1: " + Integer.toString(p1);
-            for (int i=0; i < s.length(); i++) {
-                terminal.putCharacter(s.charAt(i));
-            }
-
-            terminal.moveCursor(70,0);
-            s="Player 2: " + Integer.toString(p2);
-            for (int i=0; i < s.length(); i++) {
-                terminal.putCharacter(s.charAt(i));
-            }
-
-            terminal.moveCursor(43,30);
-            s="Computer: " + Integer.toString(comp);
-            for (int i=0; i < s.length(); i++) {
-                terminal.putCharacter(s.charAt(i));
-            }
-
-            terminal.moveCursor(49,0);
-            s=Integer.toString(count);
-            for (int i=0; i < s.length(); i++) {
-                terminal.putCharacter(s.charAt(i));
-            }
-
-            input.movePlayer(terminal,player,player2,render,monster1);
-
-            if (count >= 100) {
+            if (count <= 0) {
                 gameRuns=false;
             }
+        }
+        if (p1 > p2)
+            render.pinkWon();
+        else
+            render.greenWon();
 
-                }
-        System.out.println(comp+" "+p1+" "+p2);
+        do {
+            key=terminal.readInput();
+        }
+        while (key == null);
+        {
+            switch (key.getCharacter()) {
+                case 'n':
+                    terminal.clearScreen();
+                    Game same=new Game();
+                    same.run();
+                    break;
+            }
+        }
+
     }
 }
