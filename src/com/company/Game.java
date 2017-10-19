@@ -41,7 +41,7 @@ public class Game {
         terminal.moveCursor(49,0);
         terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
         terminal.putCharacter('0');
-        count=11;
+        count=600;
         while (gameRuns) {
             count--;
             input.movePlayer(terminal,player,player2,render,monster1,comp,p1,p2,count);
@@ -68,19 +68,21 @@ public class Game {
         else
             render.greenWon();
 
-        do {
-            key=terminal.readInput();
-        }
-        while (key == null);
-        {
-            switch (key.getCharacter()) {
-                case 'n':
-                    terminal.clearScreen();
-                    Game same=new Game();
-                    same.run();
-                    break;
-            }
-        }
+//        do {
+//            key=terminal.readInput();
+//        }
+//        while (key.getCharacter() == '0');
+//            switch (key.getCharacter()) {
+//                case 'n':
+//                    terminal.clearScreen();
+//                    Game same=new Game();
+//                    same.run();
+//                    break;
+//                case 'q':case 'Q':
+//                   System.exit(0);
+//                    break;
+//            }
+
 
     }
 }

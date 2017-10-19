@@ -33,14 +33,14 @@ public class Input {
 
             terminal.moveCursor(player.getX(),player.getY());
             terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-            terminal.putCharacter('C');
+            terminal.putCharacter('P');
             gameboard.board[player.getX()][player.getY()] = 3;
 
 
             terminal.moveCursor(player2.getX(),player2.getY());
             gameboard.board[player2.getX()][player2.getY()] = 4;
             terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-            terminal.putCharacter('Y');
+            terminal.putCharacter('G');
 
 
 
@@ -297,12 +297,12 @@ public class Input {
         terminal.moveCursor(player.getX(),player.getY());
         terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 //        gameboard.board[player2.getX()][player2.getY()] = 3;
-        terminal.putCharacter('C');
+        terminal.putCharacter('P');
 
         terminal.moveCursor(player2.getX(),player2.getY());
 //        gameboard.board[player2.getX()][player2.getY()] = 4;
         terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-        terminal.putCharacter('Y');
+        terminal.putCharacter('G');
 
         terminal.moveCursor(monster.getX(),monster.getY());
         gameboard.board[monster.getX()][monster.getY()]=0;
